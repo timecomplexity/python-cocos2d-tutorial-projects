@@ -51,7 +51,7 @@ def main():
 	player_layer.add(player)  # Adds player to instance of layer we just created
 
 	# Sets initial position and velocity of player
-	player.position = (100, 100)
+	player.position = (250, 150)
 	player.velocity = (0, 0)
 	
 	# Set the sprite's movement class
