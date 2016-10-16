@@ -1,5 +1,5 @@
 # Game development with Python and Cocos2d
-# Part 2: Sometimes it is good to put up walls
+# Part 2: First program in Saturn Valley
 
 # Alex Silcott (alexsilcott@gmail.com)
 
