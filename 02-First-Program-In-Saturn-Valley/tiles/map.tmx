@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Landscapes" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="hyptosis_tile.png" width="960" height="960"/>
+ </tileset>
+ <tileset firstgid="901" name="trees" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="hyptosis_tile.png" width="960" height="960"/>
+  <tile id="185">
+   <objectgroup draworder="index">
+    <object id="3" x="-1.5" y="0" width="34.5" height="32"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2DkKwzAQRuHBgtw9ywHcO5DkBNkqHyLrPbKUGZMUKQRCJMPI5hVf/z8EslE9Eqlhal2JbCr/Hb86aMNxAB0AkCt1j4+DyCzDNPh0pO7xrmOSwasjhY6y0FGWoXQsdNcyw6rQDgBA/231/3qn9sbvJXPjb9lJ95/VRV0NWtrwbug0HxZNN91+Vw/1/HNHG9n/zfJ8LMQa+trRRM7FexcAAAAAAPD1AsaoBzU=
+  </data>
+ </layer>
+ <layer name="PlayerLayer" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+  </data>
+ </layer>
+ <layer name="TopLayer" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmMtNw0AURUf4kwCmBpLwTagBkgBdoJBPG3wrQILUgFhCqsiKkCIIGz41cCSyYWMNsWR7zD3SkRfzpHffeDwLGyOEECIJgW9MiCUs+1mn+U2VPDXLTBvUbeIWbqc0x9j7ea7TrxLTs8layzJTm7pDPMLjlOaYzefYp99BTM8Oa6d4YpGrS00P+zhIaQ7Pss8ZdeeWtRfUXeIVXufs+8grUWjMWph1iuQ0mGGvAHMUideA+wrfgqyTJGOJc+Wh/4fz9ZDDs1ghUxVrOcwmhBBiMdq604Wj3HtZJ3CXW/buDoeO7+Ej+Z9w5PgcaXCjPRJCiIV45v6c4AtOHb5L38n+gZ/45fAcy74xK7iKkf7bF5Yd3u0u1vWOhRD/lG/20xyU
+  </data>
+ </layer>
+</map>

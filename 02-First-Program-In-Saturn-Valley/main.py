@@ -10,7 +10,7 @@ import pyglet
 from pyglet.window import key
 
 import cocos
-from cocos import actions, layer, sprite, scene
+from cocos import actions, layer, sprite, scene, tiles # Add new import statement for background tiles
 from cocos.director import director
 from cocos.layer import Layer # new import statement so we can create an object of the Layer class
 
@@ -27,6 +27,8 @@ class Player(actions.Move):
 		velocity_x = 140 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
 		velocity_y = 140 * (keyboard[key.UP] - keyboard[key.DOWN])
 		self.target.velocity = (velocity_x, velocity_y)
+		
+		scroller.set_focus(self.target.x, self.target.y)
 		
 
 # Big Text Class inherits from Layer
@@ -47,7 +49,7 @@ class BigText(Layer):
 			)
 			
 			# Set position of text
-			big_text_label.position= 5, 285
+			big_text_label.position= 5,590
 			
 			# Add label to the layer using the self identifier
 			self.add(big_text_label)
@@ -55,33 +57,55 @@ class BigText(Layer):
 # Main Function
 		
 def main():
-	global keyboard 
+	global keyboard
+	global scroller # This variable is going to become a scrolling manager to enable us to scroll along the map
 	
-	director.init(width=500, height=300, caption="In the beginning everything was Kay-O", autoscale=True, resizable=True)
-	
-	# Here we initialize the scene for cleaner code later
-	main_scene = cocos.scene.Scene()
+	# Initialize director
+	director.init(width=800, height=600, caption="In the beginning everything was Kay-O", autoscale=True, resizable=True)
 	
 	# Create player layer and add player onto it
-	player_layer = layer.Layer()
+	# This time make it a ScrollableLayer type rather than simply Layer
+	player_layer = layer.ScrollableLayer()
 	player = sprite.Sprite('images/mr-saturn.png')
 	player_layer.add(player)
 
-
 	# Sets initial position and velocity of player
-	player.position = (250, 150)
+	player.position = (750, 1200)
 	player.velocity = (0, 0)
 
 	# Set the sprite's movement class
 	player.do(Player())
 	
-	# Add layers to main_scene that we initialized earlier
-	# We have also added a second argument to the main_scene.add() call
+	# Create a new ScrollingManager object so we can scroll the view along with the player
+	# The ScrollingManager object lets us separate "world" coordinates and "screen" coordinates
+	# In this way, we can keep track of where the player is across the entire map but keep the viewport local
+	#(http://python.cocos2d.org/doc/api/cocos.layer.scrolling.html#cocos.layer.scrolling.ScrollingManager)
+	scroller = layer.ScrollingManager()
+	
+	# Now we will create a map layer based on our TMX file
+	# I called the ground layer "Ground" in the tmx file, which is what we specify here as an identifier
+	# This is located in the <layer> tags in map.tmx
+	# We do the same thing for TopLayer
+	# See README in this folder for more information
+	ground_layer = tiles.load('tiles/map.tmx')['Ground']
+	top_layer = tiles.load('tiles/map.tmx')['TopLayer']
+	
+	# Creates a text layer and adds an instance of BigText() to it
+	text_layer = BigText()
+	
+	# Add player sprite and player_layer to the ScrollingManager
+	# We have also added a second argument to the add() calls
 	# This is the z-index, which explicity determines the order of layers.
 	# Here, the player has a z-index of 1 and the text has an index of 2 so it will overlay the player.
-	# We are assuming that a background would be z = 0
-	main_scene.add(scene.Scene(player_layer), z = 1) 
-	main_scene.add(scene.Scene(BigText()), z = 2) # This time we've added the BigText() object to the scene
+	# And 0 will be the background
+	scroller.add(ground_layer, z = 0)
+	scroller.add(top_layer, z = 1)
+	scroller.add(player_layer, z = 1) 
+	
+	# Here we initialize the scene with initial layer "scroller" which holds all of the layers
+	main_scene = scene.Scene(scroller)
+	# Here we add the text_layer containing the instance of BigText() to the main scene
+	main_scene.add(text_layer, z = 2)
 
 	keyboard = key.KeyStateHandler()
 	director.window.push_handlers(keyboard)
