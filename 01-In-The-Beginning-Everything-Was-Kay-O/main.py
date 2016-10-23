@@ -40,7 +40,7 @@ def main():
 	# autoscale allows the graphics to be scaled according to the window being resized.
 	# Caption sets window title. Have some fun with that!
 	# (http://python.cocos2d.org/doc/api/cocos.director.html)
-	director.init(width=500, height=300, caption="In the beginning everything was Kay-O", autoscale=True, resizable=True)
+	director.init(width=800, height=600, caption="In the beginning everything was Kay-O", autoscale=True, resizable=True)
 
 	# Create a layer and add a sprite to the layer.
 	# Layers help to separate out different parts of a scene.
