@@ -28,6 +28,8 @@ class Player(actions.Move):
 		velocity_y = 140 * (keyboard[key.UP] - keyboard[key.DOWN])
 		self.target.velocity = (velocity_x, velocity_y)
 		
+		# This line sets the focus of the Scroller manager on the object this is assigned to
+		# In this case, the player sprite/object
 		scroller.set_focus(self.target.x, self.target.y)
 		
 
